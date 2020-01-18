@@ -1,0 +1,21 @@
+<h1>Inserção De Restaurante</h1>
+<hr>
+
+<form action="{{route('restaurant.store')}}" method="POST">
+
+{{csrf_field()}}
+    <p>     
+        <label>Nome do Restaurante</label><br>
+        <input type="text" name="name"> 
+    </p>
+    <p>     
+        <label>Endereço</label><br>
+        <input type="text" name="address"> 
+    </p>
+    <p>     
+        <label>Fale sobre o  Restaurante</label><br>
+        <textarea name="description" id="" cols="30" rows="10"></textarea> 
+    </p>
+    
+    <input type="submit" value="Cadastrar">
+</form>
