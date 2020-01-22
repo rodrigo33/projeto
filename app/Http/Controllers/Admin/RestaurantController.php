@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Restaurant;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\RestaurantRequest;
 
 class RestaurantController extends Controller
 {
@@ -17,21 +18,29 @@ class RestaurantController extends Controller
         return view('admin.restaurants.store');
     }
 
-    public function store(Request $request){
+    public function store(RestaurantRequest $request){
         $restaurantData=$request->all();
+
+        $validator = $request->validated();
 
         $restaurant = new Restaurant();
         $restaurant->create($restaurantData);
 
+        
         print 'Restaurante criado com sucesso';
     }
 
-    public function edit(Restaurant $restaurant){
+    // public function edit(Restaurant $restaurant){
+    //     return view('admin.restaurants.edit', compact('restaurant'));
+    public function edit($id){
+        $restaurant = Restaurant::findOrFail($id);
         return view('admin.restaurants.edit', compact('restaurant'));
     }
 
-    public function update(Request $request, $id){
+    public function update(RestaurantRequest $request, $id){
         $restaurantData=$request->all();
+        
+        //$request->validate();
 
         $restaurant=Restaurant::findOrFail($id);
         $restaurant->update($restaurantData);
